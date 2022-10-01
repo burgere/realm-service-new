@@ -27,7 +27,7 @@ const setupSocketConnection = (app) => {
         })
         // socket.send('Websocket initialized')
     })
-    server.listen(process.env.PORT || 8999, () => {
+    server.listen(process.env.SOCKET_PORT || 8999, () => {
         console.log(`Server started on port ${server.address().port}`);
     })
 }
