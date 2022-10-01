@@ -22,6 +22,7 @@ const setupSocketConnection = (app) => {
     wss = new websockets.Server({ server })
 
     wss.on('connection', socket => {
+        console.log(`Client connected.`)
         socket.on('message', message => {
             parseMessage(socket, message)
         })
