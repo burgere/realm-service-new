@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var sockets = require('../sockets');
-const { route } = require('./users');
 
 /* GET lobbies listing. */
 router.get('/', function (req, res, next) {
