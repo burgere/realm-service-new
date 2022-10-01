@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 const http = require('http');
+const sockets = require('./sockets');
 
 sockets.setupSocketConnection(app);
 
