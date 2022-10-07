@@ -31,6 +31,11 @@ const setupSocketConnection = (app) => {
     server.listen(process.env.SOCKET_PORT || 8999, () => {
         console.log(`Server started on port ${server.address().port}`);
     })
+    app.on("upgrade", (request, socket, head) => {
+        wss.handleUpgrade(request, socket, head, websocket => {
+            wss.emit('connection', websocket, request)
+        })
+    })
 }
 
 const parseMessage = (socket, message) => {
