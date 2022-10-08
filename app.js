@@ -34,5 +34,5 @@ app.get('/lobby-objs', function (req, res, next) {
   })
 })
 
-app.listen(port, () => console.log(`Realm multiplayer service listening on port ${port}`))
-sockets.setupSocketConnection(app)
+const server = app.listen(port, () => console.log(`Realm multiplayer service listening on port ${port}`))
+sockets.setupSocketConnection(server)

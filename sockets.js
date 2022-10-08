@@ -18,9 +18,17 @@ let wss
 const lobbies = {}
 
 const setupSocketConnection = (app) => {
-  server = http.createServer(app)
-  wss = new websockets.Server({ server })
+  // server = http.createServer(app)
+  wss = new websockets.Server({
+    noServer: true,
+    path: '/socket-connection'
+  })
 
+  app.on('upgrade', (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, websocket => {
+      wss.emit('connection', websocket, request)
+    })
+  })
   wss.on('connection', socket => {
     console.log('Client connected.')
     socket.on('message', message => {
@@ -28,14 +36,9 @@ const setupSocketConnection = (app) => {
     })
     // socket.send('Websocket initialized')
   })
-  server.listen(process.env.SOCKET_PORT || 8999, () => {
-    console.log(`Websockets started on port ${server.address().port}`)
-  })
-  app.on('upgrade', (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, websocket => {
-      wss.emit('connection', websocket, request)
-    })
-  })
+  // server.listen(process.env.PORT || 3001, () => {
+  //   console.log(`Websockets started on port ${server.address().port}`)
+  // })
 }
 
 const parseMessage = (socket, message) => {
