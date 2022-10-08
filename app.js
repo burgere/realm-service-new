@@ -28,5 +28,11 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500)
 })
 
+app.get('/lobby-objs', function (req, res, next) {
+  res.json({
+    lobbies: Object.keys(sockets.lobbies).length
+  })
+})
+
 app.listen(port, () => console.log(`Realm multiplayer service listening on port ${port}`))
 sockets.setupSocketConnection(app)
