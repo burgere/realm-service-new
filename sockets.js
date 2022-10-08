@@ -29,7 +29,7 @@ const setupSocketConnection = (app) => {
     // socket.send('Websocket initialized')
   })
   server.listen(process.env.SOCKET_PORT || 8999, () => {
-    console.log(`Server started on port ${server.address().port}`)
+    console.log(`Websockets started on port ${server.address().port}`)
   })
   app.on('upgrade', (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, websocket => {
